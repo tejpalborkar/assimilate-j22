@@ -17,7 +17,7 @@ import com.assimilate.employeeapp.model.Employee;
 /**
  * Servlet implementation class RegisterEmployeeServlet
  */
-@WebServlet("/register-employee")
+//@WebServlet("/register-employee")
 public class RegisterEmployeeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
