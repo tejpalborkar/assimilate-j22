@@ -1,3 +1,4 @@
+<%@page import="com.assimilate.employeeapp.database.EmployeeDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.assimilate.employeeapp.model.Employee"%>
 <%@page import="java.util.List"%>
@@ -12,7 +13,9 @@
 <body>
 <center><a  href="<%=application.getContextPath()%>/register-employee.jsp">Add User</a></center>
 	<%
-		List<Employee> employeeList = (ArrayList<Employee>) application.getAttribute("registeredUsers");
+		//List<Employee> employeeList = (ArrayList<Employee>) application.getAttribute("registeredUsers");
+		EmployeeDao employeeDao = new EmployeeDao();
+		List<Employee> employeeList = employeeDao.getAllEmployees();
 	%>
 
 	<p align="center">
