@@ -22,9 +22,9 @@
 		<b> Registered Users </b>
 	</p>
 	<%
-		if (employeeList == null) {
+		if (employeeList == null || employeeList.isEmpty()) {
 	%>
-	<p>not available</p>
+	<p>Employees not available</p>
 	<%
 		} else {
 	%>
@@ -33,6 +33,7 @@
 		<tr>
 			<th>First Name</th>
 			<th>Last Name</th>
+			<th>Mobile</th>
 			<th>User Name</th>
 			<th>Password</th>
 		</tr>
@@ -43,6 +44,7 @@
 		<tr>
 			<td><%=employee.getFirstName()%></td>
 			<td><%=employee.getLastName()%></td>
+			<td><%=employee.getMobileNumber()%></td>
 			<td><%=employee.getUserName()%></td>
 			<td><%=employee.getPassword()%></td>
 		</tr>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.assimilate.employeeapp.database.EmployeeDao;
 import com.assimilate.employeeapp.model.Employee;
 
 /**
@@ -50,14 +51,22 @@ public class RegisterEmployeeServletJdbc extends HttpServlet {
 		String lastName = request.getParameter("lastName");
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
+		String mobileNumber = request.getParameter("mobileNumber");
 
 		Employee emp = new Employee();
+		
 		emp.setFirstName(firstName);
 		emp.setLastName(lastName);
 		emp.setPassword(password);
 		emp.setUserName(userName);
+		emp.setMobileNumber(mobileNumber);
 		
 		// Store this employee object in database
+		
+		EmployeeDao employeeDao = new EmployeeDao();
+		
+		employeeDao.save(emp);
+		
 
 		/*ServletContext context = getServletContext();
 

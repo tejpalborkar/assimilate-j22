@@ -11,19 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.assimilate.employeeapp.database.EmployeeDao;
 import com.assimilate.employeeapp.model.Employee;
 
 /**
  * Servlet implementation class LoginServlet
  */
-//@WebServlet("/login-servlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/login-servlet")
+public class LoginServletWithJdbc extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginServlet() {
+	public LoginServletWithJdbc() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -50,7 +51,11 @@ public class LoginServlet extends HttpServlet {
 
 		ServletContext context = getServletContext();
 
-		Employee employee = (Employee) context.getAttribute(userName);
+		//Employee employee = (Employee) context.getAttribute(userName);
+		
+		EmployeeDao employeeDao = new EmployeeDao();
+		Employee employee=employeeDao.getEmployee(userName, password);
+//		Employee employee = 
 		response.setContentType("text/html");
 		if (employee == null) {
 

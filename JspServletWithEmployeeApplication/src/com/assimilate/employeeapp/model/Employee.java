@@ -4,6 +4,8 @@ public class Employee {
 	
 	private String firstName;
 	private String lastName;
+	
+	private String mobileNumber;
 	private String userName;
 	private String password;
 	
@@ -19,6 +21,17 @@ public class Employee {
 
 	public Employee() {
 		// TODO Auto-generated constructor stub
+	}
+
+	
+
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
 	}
 
 
