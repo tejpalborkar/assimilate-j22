@@ -26,6 +26,10 @@
 				<td><input type="text" size=25 name="lastName"></td>
 			</tr>
 
+			<tr>
+				<td>Mobile Number</td>
+				<td><input type="text" size=25 name="mobileNumber"></td>
+			</tr>
 
 			<tr>
 				<td>Username:</td>
