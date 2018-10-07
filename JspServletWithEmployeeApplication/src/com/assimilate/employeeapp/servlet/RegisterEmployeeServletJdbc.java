@@ -52,6 +52,8 @@ public class RegisterEmployeeServletJdbc extends HttpServlet {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		String mobileNumber = request.getParameter("mobileNumber");
+		
+		String employeeId = request.getParameter("employeeId");
 
 		Employee emp = new Employee();
 		
@@ -60,12 +62,17 @@ public class RegisterEmployeeServletJdbc extends HttpServlet {
 		emp.setPassword(password);
 		emp.setUserName(userName);
 		emp.setMobileNumber(mobileNumber);
-		
 		// Store this employee object in database
 		
 		EmployeeDao employeeDao = new EmployeeDao();
 		
-		employeeDao.save(emp);
+		
+		if(employeeId!=null) {
+			emp.setEmployeeId(Integer.parseInt(employeeId));
+			employeeDao.updateEmployee(emp);
+		}else {
+			employeeDao.save(emp);
+		}
 		
 
 		/*ServletContext context = getServletContext();
