@@ -36,6 +36,8 @@
 			<th>Mobile</th>
 			<th>User Name</th>
 			<th>Password</th>
+			<th>Action</th>
+			
 		</tr>
 
 			<%
@@ -47,6 +49,10 @@
 			<td><%=employee.getMobileNumber()%></td>
 			<td><%=employee.getUserName()%></td>
 			<td><%=employee.getPassword()%></td>
+			<td>
+				<span><a href="<%=application.getContextPath()%>/delete-employee?employeeId=<%=employee.getEmployeeId()%>">Delete</a></span>
+				<span><a href="<%=application.getContextPath()%>/update-employee?employeeId=<%=employee.getEmployeeId()%>">Edit</a></span>
+			</td>
 		</tr>
 			<%
 				}

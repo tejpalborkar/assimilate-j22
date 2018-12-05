@@ -75,10 +75,10 @@ public class EmployeeDao {
 				employee.setMobileNumber(mobileFromDb);
 			}
 
-			if(employee == null) {
-				System.out.println("Employee not exist in db with userName : "+userName);
-			}else {
-				System.out.println("Employee exist in db with userName : "+userName);
+			if (employee == null) {
+				System.out.println("Employee not exist in db with userName : " + userName);
+			} else {
+				System.out.println("Employee exist in db with userName : " + userName);
 			}
 			return employee;
 		} catch (Exception e) {
@@ -146,6 +146,7 @@ public class EmployeeDao {
 				String mobileNumber = resultset.getString("mobile_number");
 				String userName = resultset.getString("user_name");
 				String password = resultset.getString("password");
+				Integer id = resultset.getInt("id");
 
 				Employee emp = new Employee();
 
@@ -154,6 +155,7 @@ public class EmployeeDao {
 				emp.setPassword(password);
 				emp.setUserName(userName);
 				emp.setMobileNumber(mobileNumber);
+				emp.setEmployeeId(id);
 
 				System.out.println("Employee from DB: " + emp);
 				employees.add(emp);
@@ -187,6 +189,69 @@ public class EmployeeDao {
 
 		// List<Employee> employeesFromDb = dao.getAllEmployees();
 		// System.out.println("Employee count () :" + employeesFromDb.size());
+
+	}
+
+	public void deleteEmployee(Integer employeeId) {
+		System.out.println("Executing delete employee method");
+
+		try {
+
+			Connection connection = DbConnection.getConnection();
+			String sqlQuery = "DELETE from Employee where id = '" + employeeId + "'";
+
+			Statement statement = connection.createStatement();
+			int rowsAffected = statement.executeUpdate(sqlQuery);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public Employee getEmployeeById(Integer employeeId) {
+		System.out.println("Executing get employee by Id : " + employeeId);
+		Employee employee = null;
+		try {
+			Connection connection = DbConnection.getConnection();
+			String query = "SELECT * FROM employee where id = '" + employeeId + "'";
+
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+
+			List<Employee> employees = iterateResultSet(rs);
+			if (employees.size() > 0) {
+				employee = employees.get(0);
+			} else {
+				System.out.println("Employee not found in db with Id : " + employeeId);
+			}
+			return employee;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return employee;
+
+	}
+
+	public int updateEmployee(Employee emp) {
+		System.out.println("Executing update employee");
+		try {
+			Connection connection = DbConnection.getConnection();
+			String query = "UPDATE employee SET first_name ='" + emp.getFirstName() + "', last_name= '"
+					+ emp.getLastName() + "', mobile_number='" + emp.getMobileNumber() + "',user_name ='" + emp.getUserName()
+					+ "',password='" + emp.getPassword() + "' where id ='"+emp.getEmployeeId()+"'";
+			System.out.println(query);
+
+			Statement stmt = connection.createStatement();
+			int rowsAffected = stmt.executeUpdate(query);
+
+			System.out.println("Rows inserted: " + rowsAffected);
+			return rowsAffected;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
 
 	}
 

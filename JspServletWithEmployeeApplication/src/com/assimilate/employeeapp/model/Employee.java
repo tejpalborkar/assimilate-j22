@@ -2,6 +2,7 @@ package com.assimilate.employeeapp.model;
 
 public class Employee {
 	
+	private Integer employeeId;
 	private String firstName;
 	private String lastName;
 	
@@ -27,6 +28,16 @@ public class Employee {
 
 	public String getMobileNumber() {
 		return mobileNumber;
+	}
+
+
+	public Integer getEmployeeId() {
+		return employeeId;
+	}
+
+
+	public void setEmployeeId(Integer employeeId) {
+		this.employeeId = employeeId;
 	}
 
 
