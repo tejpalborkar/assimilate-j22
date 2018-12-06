@@ -9,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.assimilate.loginapp.model.User;
 
 /**
  * Servlet implementation class LoginServlet
@@ -47,6 +50,21 @@ public class LoginServlet extends HttpServlet {
 		if (userName.equals("tejpal") && password.equals("tejpal")) {
 			// credentials matched
 
+			User user = new User();
+
+			user.setFirstName("Tejpal");
+			user.setLastName("Borkar");
+			user.setMobileNumber("9096865304");
+
+			System.out.println("Inside login servlet User: " + user);
+
+			
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("user", user);
+			
+			request.setAttribute("user", user);
+			
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WelcomeServlet");
 			requestDispatcher.forward(request, response);
 		} else {

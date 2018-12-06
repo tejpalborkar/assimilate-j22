@@ -3,11 +3,15 @@ package com.assimilate.loginapp.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.assimilate.loginapp.model.User;
 
 /**
  * Servlet implementation class WelcomeServlet
@@ -30,11 +34,35 @@ public class WelcomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		String userName = request.getParameter("userName");
-		
+
 		PrintWriter printWriter = response.getWriter();
-		printWriter.write("Welcome, "+userName);
+		String userName = request.getParameter("userName");
+		HttpSession session = request.getSession();
+		User userFromSession = (User) session.getAttribute("user");
+
+		User user = (User) request.getAttribute("user");
+
+		// session scope
+		if (userFromSession != null) {
+			printWriter.write("Welcome user from session, " + user.getFirstName() + " " + user.getLastName() + "<br>");
+		} else {
+			printWriter.write("<center>Please login here </center>");
+
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
+			requestDispatcher.include(request, response);
+
+		}
+
+		// request scope
+		if (user != null) {
+			printWriter.write("Welcome, " + user.getFirstName() + " " + user.getLastName());
+		} else {
+			printWriter.write("<center>Please login here </center>");
+
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
+			requestDispatcher.include(request, response);
+
+		}
 
 	}
 
