@@ -38,7 +38,7 @@ public class WelcomeServlet extends HttpServlet {
 		PrintWriter printWriter = response.getWriter();
 		String userName = request.getParameter("userName");
 		HttpSession session = request.getSession();
-		User userFromSession = (User) session.getAttribute("user");
+		User userFromSession = (User) session.getAttribute("loggedInuser");
 
 		User user = (User) request.getAttribute("user");
 
