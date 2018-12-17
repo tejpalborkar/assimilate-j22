@@ -9,10 +9,21 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	<!--
+
+jsp:setProperty ->  We can set some variable with some initial value. name -> value
+jsp:getProperty -> to retrieve  the value 
+
+
+-->
 	<%!User userFromPageContext = null;%>
 
+	<jsp:useBean id="userService"
+		class="com.assimilate.loginapp.services.UserService"></jsp:useBean>
+
 	<%
-		UserService userService = new UserService();
+	
 		User user = userService.getUser();
 		pageContext.setAttribute("user", user);
 
@@ -24,18 +35,18 @@
 
 		// application.getContextPath()
 
-		out.println("Context path:" + application.getContextPath());
+		// 		out.println("Context path:" + application.getContextPath());
 
-		User userFromSession = (User)session.getAttribute("loggedInuser");
-		
-		out.println("<br>User from session: "+userFromSession);
+		User userFromSession = (User) session.getAttribute("loggedInuser");
+
+		// 		out.println("<br>User from session: "+userFromSession);
 	%>
 
 
 	<%
 		userFromPageContext = (User) pageContext.getAttribute("user");
 	%>
-
+	Registered users.
 	<table border="1" align="center">
 		<tr>
 			<th>First Name</th>

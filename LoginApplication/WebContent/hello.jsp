@@ -41,8 +41,16 @@
 	Mobile number: <%=user.getMobileNumber() %>
 		
 		<br>
-		Welcome to assimilate
+		Welcome to assimilate. (hello.jsp)
 
+
+<%
+
+	String userName  = request.getParameter("userName");
+		
+		out.println("<br>Welcome, "+userName);
+
+%>
 
 
 </body>

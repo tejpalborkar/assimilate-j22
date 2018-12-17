@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
 			
 			request.setAttribute("user", user);
 			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WelcomeServlet");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("welcome.jsp");
 			requestDispatcher.forward(request, response);
 		} else {
 			// credentials does not matched
