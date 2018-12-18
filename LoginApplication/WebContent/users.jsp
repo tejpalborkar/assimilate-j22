@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="com.assimilate.loginapp.services.UserService"%>
 <%@page import="com.assimilate.loginapp.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -45,6 +46,9 @@ jsp:getProperty -> to retrieve  the value
 
 	<%
 		userFromPageContext = (User) pageContext.getAttribute("user");
+	
+	
+	List<User> users = userService.getUsers();	
 	%>
 	Registered users.
 	<table border="1" align="center">
@@ -53,11 +57,21 @@ jsp:getProperty -> to retrieve  the value
 			<th>Last Name</th>
 			<th>Mobile Number</th>
 		</tr>
+
+		<%
+			for (User usr : users) {
+		%>
 		<tr>
-			<td><%=userFromPageContext.getFirstName()%></td>
-			<td><%=userFromPageContext.getLastName()%></td>
-			<td><%=userFromPageContext.getMobileNumber()%></td>
+
+			<td><%=usr.getFirstName()%></td>
+			<td><%=usr.getLastName()%></td>
+			<td><%=usr.getMobileNumber()%></td>
+
 		</tr>
+		<%
+			}
+		%>
+
 
 	</table>
 </body>
