@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.assimilate.loginapp.database.UserDboperations;
 import com.assimilate.loginapp.model.User;
 
 /**
@@ -47,24 +48,22 @@ public class LoginServlet extends HttpServlet {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 
-		if (userName.equals("tejpal") && password.equals("tejpal")) {
+		UserDboperations userDb = new UserDboperations();
+
+		User user = userDb.getUserByUserName(userName, password);
+
+		if (user != null) {
 			// credentials matched
 
-			User user = new User();
-
-			user.setFirstName("Tejpal");
-			user.setLastName("Borkar");
-			user.setMobileNumber("9096865304");
 
 			System.out.println("Inside login servlet User: " + user);
 
-			
 			HttpSession session = request.getSession();
-			
+
 			session.setAttribute("loggedInuser", user);
-			
+
 			request.setAttribute("user", user);
-			
+
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("welcome.jsp");
 			requestDispatcher.forward(request, response);
 		} else {
