@@ -124,4 +124,37 @@ public class UserDboperations {
 
 	}
 
+	public void insert(String userName, String password, String firstName, String lastName, String mobileNumber) {
+
+		Connection con = DbConnection.getConnection();
+		try {
+			PreparedStatement pstmt = con.prepareStatement(
+					"INSERT INTO user(first_name, last_name, mobile_number, user_name, password) values (?,?,?,?,?)");
+
+			pstmt.setString(1, firstName);
+			pstmt.setString(2, lastName);
+			pstmt.setString(3, mobileNumber);
+			pstmt.setString(4, userName);
+			pstmt.setString(5, password);
+
+			int rowCount = pstmt.executeUpdate();
+
+			if (rowCount <= 0) {
+				System.out.println("No rows are inserted");
+			} else {
+				System.out.println(rowCount + " row inserted successfully");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
 }

@@ -32,7 +32,7 @@
 			</tr>
 			<tr>
 				<td><a
-					href="<%=application.getContextPath()%>/register-employee.jsp">Register	here</a></td>
+					href="<%=application.getContextPath()%>/register-user.jsp">Register	here</a></td>
 			</tr>
 
 		</table>

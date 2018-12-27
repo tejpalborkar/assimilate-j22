@@ -20,29 +20,31 @@
 	Welcome to
 	<c:out value="${companyName}"></c:out>
 	<br>
-	<c:out value="${employees}"></c:out>
+<%-- 	<c:out value="${employees}"></c:out> --%>
 
-
+Employees working at <c:out value="${companyName}"></c:out>
 	<table border="1" align="center">
 		<tr>
 			<th>Employee Id</th>
 			<th>Employee Name</th>
 			<th>Salay</th>
 			<th>Department</th>
+			<th>Actions</th>
 		</tr>
 
 
 		<c:forEach var="employee" items="${employees}">
 
-			<c:if test="${employee.salary gt 10000}">
+<%-- 			<c:if test="${employee.salary gt 10000}"> --%>
 				<tr>
 					<td>${employee.employeeId}</td>
 					<td>${employee.name}</td>
 					<td>${employee.salary}</td>
 					<td>${employee.department}</td>
+					<td><a href="/LoginApplication/DeleteEmployeeServlet?employeeId=${employee.employeeId}" >Delete</a></td>
 				</tr>
 
-			</c:if>
+<%-- 			</c:if> --%>
 
 
 		</c:forEach>
@@ -50,43 +52,5 @@
 	</table>
 
 
-	<c:set var="income" scope="session" value="${500}" />
-	<p>
-		Your income is :
-		<c:out value="${income}" />
-	</p>
-	<c:choose>
-		<c:when test="${income <= 1000}">  
-       Income is not good.  
-    </c:when>
-		<c:when test="${income > 10000}">  
-        Income is very good.  
-    </c:when>
-
-		<c:otherwise>  
-       Income is undetermined...  
-    </c:otherwise>
-	</c:choose>
-<br>
-For tokens example <br>
-<c:forTokens items="Rahul,Nakul,Rajesh" delims="," var="name">  
-   <c:out value="${name}"/><p>  
-</c:forTokens>
-
-<br>
-
-C:URL example
-<br>
-	<c:url value="/process.jsp" var="processJspUrl">
-		<c:param name="orderId" value="786" />
-		<c:param name="user" value="Nakul" />
-	</c:url>
-	
-	<c:out value="${processJspUrl}"></c:out>
-	<br>
-	Process.jsp <a href="${processJspUrl}"> Click here</a>
-
-<%-- <c:redirect url="/process.jsp"></c:redirect> --%>
-	
 </body>
 </html>

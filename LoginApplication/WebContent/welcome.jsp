@@ -35,5 +35,13 @@ First Name : <jsp:getProperty property="firstName" name="userBean"/><br>
 Last Name : <jsp:getProperty property="lastName" name="userBean"/><br>
 Mobile :  <jsp:getProperty property="mobileNumber" name="userBean"/><br>
 
+<br>
+<a href="users.jsp">List users </a>
+
+<br>
+<a href="employees.jsp">List Employees </a>
+
+<br>
+<a href="register-employee.jsp">Add employee </a>
 
 </body>
