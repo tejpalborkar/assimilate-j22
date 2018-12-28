@@ -28,19 +28,8 @@ jsp:getProperty -> to retrieve  the value
 		User user = userService.getUser();
 		pageContext.setAttribute("user", user);
 
-		// 		request.getAttribute("")
-		// 		request.getParameter("");
-
-		// 		response.sendRedirect("hello.jsp");
-		// config.getInitParameter("");
-
-		// application.getContextPath()
-
-		// 		out.println("Context path:" + application.getContextPath());
-
 		User userFromSession = (User) session.getAttribute("loggedInuser");
 
-		// 		out.println("<br>User from session: "+userFromSession);
 	%>
 
 

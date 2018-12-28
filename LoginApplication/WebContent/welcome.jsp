@@ -21,7 +21,7 @@
 		
 		</jsp:forward> 
  --%>
-	<jsp:useBean id="userBean" class="com.assimilate.loginapp.model.User"
+<%-- 	<jsp:useBean id="userBean" class="com.assimilate.loginapp.model.User"
 		scope="page">
 		<jsp:setProperty property="firstName" name="userBean" value="Tejpal" />
 		<jsp:setProperty property="lastName" name="userBean" value="Borkar" />
@@ -34,7 +34,7 @@ User details from userBean <br>
 First Name : <jsp:getProperty property="firstName" name="userBean"/><br>
 Last Name : <jsp:getProperty property="lastName" name="userBean"/><br>
 Mobile :  <jsp:getProperty property="mobileNumber" name="userBean"/><br>
-
+ --%>
 <br>
 <a href="users.jsp">List users </a>
 

@@ -43,8 +43,7 @@ public class EmployeeDbOperations {
 				System.out.println("Employee Name: " + employeeName);
 				System.out.println("Salary: " + salary);
 				System.out.println("Department: " + department);
-				
-				
+
 				Employee emp2 = new Employee();
 				emp2.setEmployeeId(id);
 				emp2.setName(employeeName);
@@ -52,7 +51,6 @@ public class EmployeeDbOperations {
 				emp2.setDepartment(department);
 
 				employees.add(emp2);
-
 
 				System.out.println("==============================================");
 			}
@@ -169,5 +167,82 @@ public class EmployeeDbOperations {
 		test.delete(89);
 		System.out.println("Latest Records");
 		test.retriveAll();
+	}
+
+	public Employee getEmployeeByEmployeeId(Integer employeeId) {
+		Connection connection = getConnection();
+		try {
+
+			String sqlQuery = "SELECT * FROM employee where employee_id=?";
+			PreparedStatement pstmt = connection.prepareStatement(sqlQuery);
+			pstmt.setInt(1, employeeId);
+
+			ResultSet resultSet = pstmt.executeQuery();
+
+			while (resultSet.next()) {
+
+				Integer id = resultSet.getInt("employee_id");
+				String employeeName = resultSet.getString("employee_name");
+				Integer salary = resultSet.getInt("salary");
+				String department = resultSet.getString("department");
+
+				System.out.println("Id: " + id);
+				System.out.println("Employee Name: " + employeeName);
+				System.out.println("Salary: " + salary);
+				System.out.println("Department: " + department);
+
+				Employee emp = new Employee();
+				emp.setEmployeeId(id);
+				emp.setName(employeeName);
+				emp.setSalary(salary);
+				emp.setDepartment(department);
+
+				System.out.println("==============================================");
+				return emp;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+
+	}
+
+	public void update(Integer employeeId, String name, String salary, String department) {
+
+		Connection con = getConnection();
+		try {
+			PreparedStatement pstmt = con
+					.prepareStatement("UPDATE employee SET employee_name =?, salary = ?, department = ? where employee_id  =?");
+
+			pstmt.setString(1, name);
+			pstmt.setInt(2, Integer.parseInt(salary));
+			pstmt.setString(3, department);
+			pstmt.setInt(4, employeeId);
+
+			int rowCount = pstmt.executeUpdate();
+
+			if (rowCount <= 0) {
+				System.out.println("No rows are updated");
+			} else {
+				System.out.println(rowCount + " row updated successfully");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 }
