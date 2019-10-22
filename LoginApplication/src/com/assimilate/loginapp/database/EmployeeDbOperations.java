@@ -14,8 +14,8 @@ import com.assimilate.loginapp.model.Employee;
 public class EmployeeDbOperations {
 
 	public static final String url = "jdbc:mysql://localhost:3306/assimilate_dec18";
-	public static final String user = "root";
-	public static final String password = "root";
+	public static final String user = "tejpal";
+	public static final String password = "tejpal";
 
 	public Connection getConnection() {
 		return DbConnection.getConnection();

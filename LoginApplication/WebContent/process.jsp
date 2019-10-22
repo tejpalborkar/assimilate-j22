@@ -8,10 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	company name from session scope: <c:out value="${companyName}"></c:out>
-	
-	<br>
-	Order Id :<c:out value="${param.orderId}"></c:out>
+	company name from session scope:
+	<c:out value="${companyName}"></c:out>
+
+	<br> Order Id :
+	<c:out value="${param.orderId}"></c:out>
 
 
 
@@ -32,26 +33,25 @@
        Income is undetermined...  
     </c:otherwise>
 	</c:choose>
-<br>
-For tokens example <br>
-<c:forTokens items="Rahul,Nakul,Rajesh" delims="," var="name">  
-   <c:out value="${name}"/><p>  
-</c:forTokens>
+	<br> For tokens example
+	<br>
+	<c:forTokens items="Rahul,Nakul,Rajesh" delims="," var="name">
+		<c:out value="${name}" />
+		<p>
+	</c:forTokens>
 
-<br>
-
-C:URL example
-<br>
+	<br> C:URL example
+	<br>
 	<c:url value="/process.jsp" var="processJspUrl">
 		<c:param name="orderId" value="786" />
 		<c:param name="user" value="Nakul" />
 	</c:url>
-	
-	<c:out value="${processJspUrl}"></c:out>
-	<br>
-	Process.jsp <a href="${processJspUrl}"> Click here</a>
 
-<%-- <c:redirect url="/process.jsp"></c:redirect> --%>
-	
+	<c:out value="${processJspUrl}"></c:out>
+	<br> Process.jsp
+	<a href="${processJspUrl}"> Click here</a>
+
+	<%-- <c:redirect url="/process.jsp"></c:redirect> --%>
+
 </body>
 </html>

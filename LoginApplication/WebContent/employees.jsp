@@ -20,12 +20,13 @@
 	Welcome to
 	<c:out value="${companyName}"></c:out>
 	<br>
-<%-- 	<c:out value="${employees}"></c:out> --%>
+	<%-- 	<c:out value="${employees}"></c:out> --%>
 
-Employees working at <c:out value="${companyName}"></c:out>
-<br>
-<a href="register-employee.jsp" >Add Employee</a>
-<br>
+	Employees working at
+	<c:out value="${companyName}"></c:out>
+	<br>
+	<a href="register-employee.jsp">Add Employee</a>
+	<br>
 	<table border="1" align="center">
 		<tr>
 			<th>Employee Id</th>
@@ -38,17 +39,19 @@ Employees working at <c:out value="${companyName}"></c:out>
 
 		<c:forEach var="employee" items="${employees}">
 
-<%-- 			<c:if test="${employee.salary gt 10000}"> --%>
-				<tr>
-					<td>${employee.employeeId}</td>
-					<td>${employee.name}</td>
-					<td>${employee.salary}</td>
-					<td>${employee.department}</td>
-					<td><a href="/LoginApplication/DeleteEmployeeServlet?employeeId=${employee.employeeId}" >Delete</a>|
-					<a href="/LoginApplication/EditEmployeeServlet?employeeId=${employee.employeeId}" >Edit</a></td>
-				</tr>
+			<%-- 			<c:if test="${employee.salary gt 10000}"> --%>
+			<tr>
+				<td>${employee.employeeId}</td>
+				<td>${employee.name}</td>
+				<td>${employee.salary}</td>
+				<td>${employee.department}</td>
+				<td><a
+					href="/LoginApplication/DeleteEmployeeServlet?employeeId=${employee.employeeId}">Delete</a>|
+					<a
+					href="/LoginApplication/EditEmployeeServlet?employeeId=${employee.employeeId}">Edit</a></td>
+			</tr>
 
-<%-- 			</c:if> --%>
+			<%-- 			</c:if> --%>
 
 
 		</c:forEach>
