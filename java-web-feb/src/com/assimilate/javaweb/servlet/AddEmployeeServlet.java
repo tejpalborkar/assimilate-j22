@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -57,13 +58,20 @@ public class AddEmployeeServlet extends HttpServlet {
 			prepareStatement.setString(3, age);
 			int executeUpdate = prepareStatement.executeUpdate();
 			System.out.println("Employee inserted: "+executeUpdate);
+			response.setContentType("text/html");
+			response.getWriter().append("Employee created");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ViewAllEmployeesServlet");
+		//	requestDispatcher.forward(request, response);
+			
+			response.sendRedirect("ViewAllEmployeesServlet");
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		
-		response.getWriter().append("Employee created");
+		
 		
 		
 	}

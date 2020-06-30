@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public class JdbcTest {
 
-	public Connection getConnection() {
+	public static Connection getConnection() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("Driver class is loaded..");
