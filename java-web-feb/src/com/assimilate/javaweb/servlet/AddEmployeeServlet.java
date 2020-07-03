@@ -58,10 +58,15 @@ public class AddEmployeeServlet extends HttpServlet {
 			prepareStatement.setString(3, age);
 			int executeUpdate = prepareStatement.executeUpdate();
 			System.out.println("Employee inserted: "+executeUpdate);
+			
 			response.setContentType("text/html");
+			
 			response.getWriter().append("Employee created");
+			
+			
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ViewAllEmployeesServlet");
 		//	requestDispatcher.forward(request, response);
+			//include
 			
 			response.sendRedirect("ViewAllEmployeesServlet");
 			
