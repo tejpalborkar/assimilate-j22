@@ -45,12 +45,15 @@ public class ViewAllEmployeesServlet extends HttpServlet {
 					"    <th>Id</th>\n" + 
 					"    <th>name</th>\n" + 
 					"    <th>Age</th>\n" + 
+					"    <th>Action</th>\n" + 
 					"  </tr>");
 			while (resultSet.next()) {
 				printWriter.write("<tr>\n" + 
 						"    <td>"+resultSet.getInt("id")+"</td>\n" + 
 						"    <td>"+resultSet.getString("name")+"</td>\n" + 
-						"    <td>"+ resultSet.getInt("age") + "</td>\n"
+						"    <td>"+ resultSet.getInt("age") + "</td>\n" +
+						"    <td> <a href='DeleteEmployeeServlet?id="+resultSet.getInt("id")+"'>Delete </a> </td>\n" +
+						"    <td> <a href='EditEmployeeServlet?id="+resultSet.getInt("id")+"'>Edit</a> </td>\n"
 						+ "  </tr>");
 			}
 			printWriter.write("</table>");

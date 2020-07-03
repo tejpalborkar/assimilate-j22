@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>servlet-config-demo</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	<context-param>
+		<param-name>database-url</param-name>
+		<param-value>jdbc:mysql://localhost:3306/java_feb</param-value>
+	</context-param>
+
+	<servlet>
+		<description></description>
+		<display-name>ServletConfigDemo</display-name>
+		<servlet-name>ServletConfigDemo</servlet-name>
+		<servlet-class>com.assimmilate.javafeb.ServletConfigDemo</servlet-class>
+		<init-param>
+			<param-name>database-url</param-name>
+			<param-value>jdbc:mysql://localhost:3306/java_feb</param-value>
+		</init-param>
+		<init-param>
+			<param-name>database-user</param-name>
+			<param-value>tejpal</param-value>
+		</init-param>
+		<init-param>
+			<param-name>database-password</param-name>
+			<param-value>tejpal</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServletConfigDemo</servlet-name>
+		<url-pattern>/ServletConfigDemo</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>AnotherServlet</display-name>
+		<servlet-name>AnotherServlet</servlet-name>
+		<servlet-class>com.assimmilate.javafeb.AnotherServlet</servlet-class>
+		<init-param>
+			<param-name>database-url</param-name>
+			<param-value>jdbc:mysql://localhost:3306/java_feb</param-value>
+		</init-param>
+		<init-param>
+			<param-name>database-user</param-name>
+			<param-value>tejpal</param-value>
+		</init-param>
+		<init-param>
+			<param-name>database-password</param-name>
+			<param-value>tejpal</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AnotherServlet</servlet-name>
+		<url-pattern>/AnotherServlet</url-pattern>
+	</servlet-mapping>
+</web-app>
