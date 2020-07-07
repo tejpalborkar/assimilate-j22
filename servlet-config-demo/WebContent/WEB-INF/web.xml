@@ -35,10 +35,17 @@
 			<param-value>tejpal</param-value>
 		</init-param>
 	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>ServletConfigDemo</servlet-name>
 		<url-pattern>/ServletConfigDemo</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AnotherServlet</servlet-name>
+		<url-pattern>/AnotherServlet</url-pattern>
+	</servlet-mapping>
+	
 	<servlet>
 		<description></description>
 		<display-name>AnotherServlet</display-name>
@@ -57,8 +64,6 @@
 			<param-value>tejpal</param-value>
 		</init-param>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>AnotherServlet</servlet-name>
-		<url-pattern>/AnotherServlet</url-pattern>
-	</servlet-mapping>
+	
+	
 </web-app>

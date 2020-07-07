@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class AnotherServlet
@@ -47,6 +48,21 @@ public class AnotherServlet extends HttpServlet {
 		
 		writer.append("Company Name: "+servletContext.getAttribute("company-name"));
 		servletContext.removeAttribute("company-name");
+		
+		//set attributes at application scope
+		servletContext.setAttribute("user", "Tejpal");
+		
+		//Set attributes in request scope
+		request.setAttribute("user", "Tejpal");
+		
+		HttpSession session = request.getSession();
+		System.out.println(session.getId());
+		session.invalidate();
+		//set attributes in session scope
+		session.setAttribute("loggedinuser", "Tejpal");
+		
+		String loggedInUser = (String) session.getAttribute("loggedinuser");
+		writer.append("Logged in user : "+loggedInUser);
 	}
 
 	/**

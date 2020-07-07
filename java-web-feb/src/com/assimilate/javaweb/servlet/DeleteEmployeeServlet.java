@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.mysql.cj.jdbc.JdbcConnection;
 
@@ -21,53 +22,67 @@ import com.mysql.cj.jdbc.JdbcConnection;
 @WebServlet("/DeleteEmployeeServlet")
 public class DeleteEmployeeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteEmployeeServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public DeleteEmployeeServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter writer = response.getWriter();
 		response.setContentType("text/html");
+
+		HttpSession session = request.getSession();
+		String userFromSession = (String) session.getAttribute("loggedInUser");
+		if (userFromSession == null) {
+			writer.write("Please login first.");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.html");
+			requestDispatcher.include(request, response);
+			return;
+		}
+
 		String id = request.getParameter("id");
 		Connection connection = JdbcTest.getConnection();
 		String query = "delete from employee where id = ?";
 		try {
 			PreparedStatement prepareStatement = connection.prepareStatement(query);
 			prepareStatement.setString(1, id);
-			int rowsDeleted= prepareStatement.executeUpdate();
-			if(rowsDeleted >0) {
+			int rowsDeleted = prepareStatement.executeUpdate();
+			if (rowsDeleted > 0) {
 				System.out.println("Employee deleted successully..");
 				writer.append("Employee deleted successully..");
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("ViewAllEmployeesServlet");
 				requestDispatcher.include(request, response);
-				
-			}else {
+
+			} else {
 				System.out.println("Employee not deleted..");
 				writer.append("Employee not deleted..");
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("ViewAllEmployeesServlet");
 				requestDispatcher.include(request, response);
-				
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
