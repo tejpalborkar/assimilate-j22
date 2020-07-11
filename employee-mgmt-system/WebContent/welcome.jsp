@@ -28,12 +28,10 @@
 
 		HttpServlet servlet = (HttpServlet) page;
 
-		if (paramValue.equals("Raj")) {
 
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("user.jsp");
 			requestDispatcher.forward(request, response);
 
-		}
 		pageContext.setAttribute("actor", "Salman Khan", PageContext.SESSION_SCOPE);
 
 		//	response.sendRedirect("http://localhost:8080/employee-mgmt-system/user.jsp");
