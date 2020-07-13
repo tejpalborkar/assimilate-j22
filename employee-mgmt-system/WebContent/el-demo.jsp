@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.assimilate.ems.Employee"%>
+<%@page import="com.assimilate.ems.model.Employee"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -40,7 +40,6 @@
 
 	<%
 		Employee emp = new Employee();
-		emp.setFirstName("Tejpal");
 		emp.setId(100);
 		emp.setMobile("9879879");
 
@@ -52,7 +51,7 @@
 		emps.add(emp);
 	%>
 
-	<br> Employee name : ${emp.firstName}
+	<br> Employee name : ${emp.name}
 	<br> Employee id : ${emp.id}
 	<br> Employee mobile : ${emp.mobile}
 	<br>
@@ -69,7 +68,7 @@
 				%> 
 				<tr>
 						<td><%=emp1.getId() %></td>
-						<td><%=emp1.getFirstName() %></td>
+						<td><%=emp1.getName() %></td>
 						<td><%=emp1.getMobile() %></td>
 				<tr>
 				

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:useBean id="empBean" class="com.assimilate.ems.Employee"
+	<jsp:useBean id="empBean" class="com.assimilate.ems.model.Employee"
 		scope="application"></jsp:useBean>
 
 	<br> Employee name from userBean : Name:
@@ -22,7 +22,7 @@
 	
 	<%
 	
-		String firstname= empBean.getFirstName();
+		String firstname= empBean.getName();
 	%>
 
 </body>

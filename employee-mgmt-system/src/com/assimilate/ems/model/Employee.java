@@ -1,12 +1,27 @@
-package com.assimilate.ems;
+package com.assimilate.ems.model;
 
 public class Employee {
 	private Integer id;
 	private String name;
-	private String mobile;
-	private String userId;
+	private String age;
+	private String userName;
 	private String password;
-	private String firstName;
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public Integer getId() {
 		return id;
@@ -25,19 +40,19 @@ public class Employee {
 	}
 
 	public String getMobile() {
-		return mobile;
+		return age;
 	}
 
 	public void setMobile(String mobile) {
-		this.mobile = mobile;
+		this.age = mobile;
 	}
 
 	public String getUserId() {
-		return userId;
+		return userName;
 	}
 
 	public void setUserId(String userId) {
-		this.userId = userId;
+		this.userName = userId;
 	}
 
 	public String getPassword() {
@@ -47,15 +62,6 @@ public class Employee {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	
 	
 
 }
