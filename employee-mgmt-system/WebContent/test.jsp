@@ -1,4 +1,4 @@
-<%@page import="com.assimilate.ems.Employee"%>
+<%@page import="com.assimilate.ems.model.Employee"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -17,18 +17,18 @@
 	<%-- <jsp:include page="user.jsp"></jsp:include> --%>
 	<%
 		Employee emp = new Employee();
-		emp.setName("Tejpal");
-		emp.setMobile("998798");
-		emp.setPassword("1234");
-		emp.setUserId("tejpal");
-		emp.setId(12345);
-		
-		application.setAttribute("empBean",emp);
-		session.setAttribute("empBean",emp);
+			emp.setName("Tejpal");
+			emp.setMobile("998798");
+			emp.setPassword("1234");
+			emp.setUserId("tejpal");
+			emp.setId(12345);
+			
+			application.setAttribute("empBean",emp);
+			session.setAttribute("empBean",emp);
 	%>
 
 
-	<jsp:useBean id="empBean" class="com.assimilate.ems.Employee"
+	<jsp:useBean id="empBean" class="com.assimilate.ems.model.Employee"
 		scope="application">
 
 	</jsp:useBean>

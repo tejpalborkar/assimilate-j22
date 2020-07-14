@@ -7,22 +7,6 @@ public class Employee {
 	private String userName;
 	private String password;
 
-	public String getAge() {
-		return age;
-	}
-
-	public void setAge(String age) {
-		this.age = age;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -39,20 +23,20 @@ public class Employee {
 		this.name = name;
 	}
 
-	public String getMobile() {
+	public String getAge() {
 		return age;
 	}
 
-	public void setMobile(String mobile) {
-		this.age = mobile;
+	public void setAge(String age) {
+		this.age = age;
 	}
 
-	public String getUserId() {
+	public String getUserName() {
 		return userName;
 	}
 
-	public void setUserId(String userId) {
-		this.userName = userId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getPassword() {
@@ -62,6 +46,5 @@ public class Employee {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 
 }
