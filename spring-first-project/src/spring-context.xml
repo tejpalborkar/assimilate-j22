@@ -10,6 +10,44 @@
 		class="com.assimilate.spring.Student">
 		<property name="name" value="Tejpal"></property>
 		<property name="rollNo" value="1234"></property>
+		<property name="course" ref="courseBean"></property>
 	</bean>
-	
+
+	<bean id="courseBean" class="com.assimilate.spring.Course">
+		<property name="courseName" value="Computer"></property>
+		<property name="duration" value="6"></property>
+
+	</bean>
+
+	<bean id="studentBean2" name="studentBean2"
+		class="com.assimilate.spring.Student">
+		<property name="name" value="Sachin"></property>
+		<property name="rollNo" value="100"></property>
+		<property name="course" ref="courseBean"></property>
+	</bean>
+
+
+	<bean id="studentBean3" name="studentBean3"
+		class="com.assimilate.spring.Student">
+
+		<!-- setter DI -->
+		<property name="name" value="Sachin"></property>
+		<property name="rollNo" value="100"></property>
+
+		<!-- constructor di -->
+
+		<constructor-arg name="course" ref="courseBean"></constructor-arg>
+	</bean>
+
+	<bean id="course" class="com.assimilate.spring.Course">
+		<property name="courseName" value="EnTC"></property>
+		<property name="duration" value="4"></property>
+	</bean>
+
+	<bean id="studentBean4" class="com.assimilate.spring.Student"
+		autowire="default">
+		<property name="name" value="Sachin"></property>
+		<property name="rollNo" value="100"></property>
+	</bean>
+
 </beans>

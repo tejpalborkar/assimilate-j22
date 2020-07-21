@@ -13,6 +13,8 @@ public class ReflectionTest {
 			
 			Class companyClass = Class.forName("com.assimilate.javafeb.reflection.Company");
 			Object newInstance = companyClass.newInstance();
+			
+			
 			Method[] methods = companyClass.getDeclaredMethods();
 			System.out.println(methods.length);
 			for (Method method : methods) {

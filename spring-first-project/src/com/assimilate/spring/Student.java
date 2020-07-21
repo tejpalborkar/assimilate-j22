@@ -5,10 +5,19 @@ public class Student {
 	private String name;
 	private String rollNo;
 	
+	private Course course;
 	
-	private Student() {
-		
+
+	public Student() {
+		System.out.println("Student constructor called..");
 	}
+	
+	
+	public Student(Course course) {
+		System.out.println("Student constructor called..");
+		this.course = course;
+	}
+	
 	
 	
 	public String getName() {
@@ -35,12 +44,21 @@ public class Student {
 
 
 
+	public Course getCourse() {
+		return course;
+	}
+
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Student [name=" + name + ", rollNo=" + rollNo + "]";
+		return "Student [name=" + name + ", rollNo=" + rollNo + ", course=" + course + "]";
 	}
-	
-	
-	
+
+
 
 }
