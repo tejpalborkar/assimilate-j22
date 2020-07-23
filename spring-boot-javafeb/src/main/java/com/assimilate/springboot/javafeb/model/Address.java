@@ -1,4 +1,4 @@
-package com.assimilate.springboot.javafeb;
+package com.assimilate.springboot.javafeb.model;
 
 import org.springframework.stereotype.Component;
 

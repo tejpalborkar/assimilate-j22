@@ -1,4 +1,4 @@
-package com.assimilate.springboot.javafeb;
+package com.assimilate.springboot.javafeb.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
