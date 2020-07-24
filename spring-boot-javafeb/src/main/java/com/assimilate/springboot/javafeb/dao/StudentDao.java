@@ -14,6 +14,6 @@ public interface StudentDao {
 
 	public List<Student> findAll();
 
-	public void findById(Integer id);
+	public Student findById(Integer id);
 
 }

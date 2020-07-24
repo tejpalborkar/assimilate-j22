@@ -1,17 +1,16 @@
 package com.assimilate.springboot.javafeb.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.assimilate.springboot.javafeb.model.Student;
 
-@Component
+@Repository
 public class StudentDaoImpl implements StudentDao {
 
 	@Autowired
@@ -31,44 +30,37 @@ public class StudentDaoImpl implements StudentDao {
 
 	@Override
 	public void update(Student student) {
-	
+
 		System.out.println("Student updated.");
 	}
 
 	@Override
 	public void delete(Integer studentId) {
-		String sql=  "delete from student where id=?";
+		String sql = "delete from student where id=?";
 		int rowsDeleted = jdbcTemplate.update(sql, studentId);
-		System.out.println("Student deleted: "+rowsDeleted);
+		System.out.println("Student deleted: " + rowsDeleted);
 
 	}
 
 	@Override
 	public List<Student> findAll() {
-
 		String sql = "select * from student";
-		List<Student> students = jdbcTemplate.query(sql, new RowMapper<Student>() {
-			@Override
-			public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Student student = new Student();
-				student.setId(rs.getInt("id"));
-				student.setFirstName(rs.getString("firstName"));
-				student.setLastName(rs.getString("lastName"));
-				student.setRollNo(rs.getInt("rollNo"));
-				student.setMobile(rs.getString("mobile"));
-				student.setCourse(rs.getString("course"));
-				return student;
-			}
-
-		});
-
+		List<Student> students = jdbcTemplate.query(sql, new StudentMapper());
 		return students;
 	}
 
 	@Override
-	public void findById(Integer id) {
-		// TODO Auto-generated method stub
-
+	public Student findById(Integer id) {
+		String sql = "select * from student where id = ?";
+//		List<Student> students = jdbcTemplate.query(sql, new StudentMapper(), id);
+//		if (students.isEmpty()) {
+//			return null;
+//		} else {
+//			return students.get(0);
+//		}
+		Student student = jdbcTemplate.queryForObject(sql, new Object[] { id },
+				new BeanPropertyRowMapper<Student>(Student.class));
+		return student;
 	}
 
 }
