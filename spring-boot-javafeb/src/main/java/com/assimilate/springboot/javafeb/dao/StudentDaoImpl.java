@@ -52,15 +52,15 @@ public class StudentDaoImpl implements StudentDao {
 	@Override
 	public Student findById(Integer id) {
 		String sql = "select * from student where id = ?";
-//		List<Student> students = jdbcTemplate.query(sql, new StudentMapper(), id);
-//		if (students.isEmpty()) {
-//			return null;
-//		} else {
-//			return students.get(0);
-//		}
-		Student student = jdbcTemplate.queryForObject(sql, new Object[] { id },
-				new BeanPropertyRowMapper<Student>(Student.class));
-		return student;
+		List<Student> students = jdbcTemplate.query(sql, new StudentMapper(), id);
+		if (students.isEmpty()) {
+			return null;
+		} else {
+			return students.get(0);
+		}
+//		Student student = jdbcTemplate.queryForObject(sql, new Object[] { id },
+//				new BeanPropertyRowMapper<Student>(Student.class));
+//		return student;
 	}
 
 }
