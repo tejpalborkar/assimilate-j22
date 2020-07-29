@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.assimilate.springboot.javafeb.dao.StudentDao;
@@ -19,11 +22,6 @@ public class StudentController {
 
 	@Autowired
 	StudentDao studentDao;
-
-	@RequestMapping(value = "/students")
-	public List<Student> students() {
-		return studentDao.findAll();
-	}
 
 	// Add student
 	// Retrieve Student, -( byname, by id, by mobile no)
@@ -48,6 +46,23 @@ public class StudentController {
 
 	// Student controller -> Create Student
 
+	// HTTP STATUS
+	// 2xx -> 200, 201, 202, ... Successful operation
+	// 3xx -> Redirection
+	// 4xx -> client error
+	// 400 -> Bad request (json is incorrect)
+	// 401 -> Unuthorzied (usernmae/passsord is incorrect, jwt expired)
+	// 404 -> Resource not foud ( url is incorrect or resource not available for
+	// given criteria or id)
+
+	// 5xx -> 500, 502, -> Internal server error, 502 service not.
+	// /xyz -> redirects /abc 3xx, 302
+
+	@RequestMapping(value = "/students")
+	public List<Student> students() {
+		return studentDao.findAll();
+	}
+
 	@RequestMapping(value = "/students", method = RequestMethod.POST)
 	public String creatStudent(@RequestBody Student student) {
 		studentDao.save(student);
@@ -56,8 +71,18 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "/students/{id}", method = RequestMethod.GET)
-	public Student findById(@PathVariable(name = "id") Integer id) {
-		return studentDao.findById(id);
+	public ResponseEntity<?> findById(@PathVariable(name = "id") Integer id) {
+		Student student = studentDao.findById(id);
+
+		ResponseEntity<?> studedntResponse = null;
+
+		if (student != null) {
+			studedntResponse = new ResponseEntity<Student>(student, HttpStatus.OK);
+		} else {
+			studedntResponse = new ResponseEntity<String>("Student not found with id: "+id, HttpStatus.NOT_FOUND);
+		}
+		return studedntResponse;
+
 	}
 
 	@RequestMapping(value = "/students/{id}", method = RequestMethod.DELETE)
@@ -71,6 +96,13 @@ public class StudentController {
 		student.setId(id);
 		studentDao.update(student);
 		return student;
+	}
+
+	@RequestMapping(value = "/students/search", method = RequestMethod.GET)
+	public Student search(@RequestParam(name = "rollNo", required = false) Integer rollNo,
+			@RequestParam(name = "firstName", required = false) String firstName,
+			@RequestParam(name = "mobile", required = false) String mobile) {
+		return studentDao.search(rollNo, firstName, mobile);
 	}
 
 }

@@ -63,4 +63,29 @@ public class StudentDaoImpl implements StudentDao {
 //		return student;
 	}
 
+	@Override
+	public Student findByRollNo(Integer rollNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Student search(Integer rollNo, String firstName, String mobile) {
+		String sql = "select * from student where";
+
+		if (rollNo != null) {
+			sql += " rollNo=?";
+		}
+
+		if (firstName != null) {
+			sql += " firstName=?";
+		}
+		if (mobile != null) {
+			sql += " mobile=?";
+		}
+		System.out.println(sql);
+		List<Student> students = jdbcTemplate.query(sql, new StudentMapper(), rollNo);
+		return null;
+	}
+
 }

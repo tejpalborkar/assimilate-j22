@@ -16,4 +16,8 @@ public interface StudentDao {
 
 	public Student findById(Integer id);
 
+	public Student findByRollNo(Integer rollNo);
+
+	public Student search(Integer rollNo, String firstName, String mobile);
+
 }
