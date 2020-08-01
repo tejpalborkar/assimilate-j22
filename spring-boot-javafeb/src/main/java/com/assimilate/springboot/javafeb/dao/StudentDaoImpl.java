@@ -17,28 +17,32 @@ public class StudentDaoImpl implements StudentDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public void save(Student student) {
+	public int save(Student student) {
 
 		String sql = "insert into student(firstName, lastName, rollNo, mobile, course) values(?,?,?,?,?)";
-		int update = jdbcTemplate.update(sql, student.getFirstName(), student.getLastName(), student.getRollNo(),
+		int rowsUpdated = jdbcTemplate.update(sql, student.getFirstName(), student.getLastName(), student.getRollNo(),
 				student.getMobile(), student.getCourse());
 
-		System.out.println("Rows inserted: " + update);
+		System.out.println("Rows inserted: " + rowsUpdated);
 		System.out.println("Student saved.");
+		
+		return rowsUpdated;
 
 	}
 
 	@Override
-	public void update(Student student) {
+	public int update(Student student) {
 
 		System.out.println("Student updated.");
+		return 1;
 	}
 
 	@Override
-	public void delete(Integer studentId) {
+	public int delete(Integer studentId) {
 		String sql = "delete from student where id=?";
 		int rowsDeleted = jdbcTemplate.update(sql, studentId);
 		System.out.println("Student deleted: " + rowsDeleted);
+		return rowsDeleted;
 
 	}
 

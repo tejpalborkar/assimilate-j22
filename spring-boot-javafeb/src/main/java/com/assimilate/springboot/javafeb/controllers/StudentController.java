@@ -3,106 +3,142 @@ package com.assimilate.springboot.javafeb.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.assimilate.springboot.javafeb.dao.StudentDao;
 import com.assimilate.springboot.javafeb.model.Student;
+import com.assimilate.springboot.javafeb.model.StudentVo;
 
-@RestController
+@Controller
 public class StudentController {
 
 	@Autowired
-	StudentDao studentDao;
+	private StudentDao studentDao;
 
-	// Add student
-	// Retrieve Student, -( byname, by id, by mobile no)
-	// delete the student
-	// view all students.
+	@GetMapping("/students")
+	public ModelAndView viewAllStudents() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("students");
+		List<Student> studentList = studentDao.findAll();
+		System.out.println("Students fetched from db : " + studentList.size());
+		modelAndView.addObject("students", studentList);
 
-	// HTTP method
-	// POST -> Create a resource
-	// PUT -> Update the existing resource
-	// Delete -> Delete the existing resource
-	// GET -> Retrieve the resources from the server.
-
-	// Add student:
-	// Json student (Request Body) (payload)
-	// URL pattern: /students/
-	// Request Method: POST
-
-	// Delete a student
-	// need a id with request
-	// URL pattern: /students/{id}
-	// method: DELETE
-
-	// Student controller -> Create Student
-
-	// HTTP STATUS
-	// 2xx -> 200, 201, 202, ... Successful operation
-	// 3xx -> Redirection
-	// 4xx -> client error
-	// 400 -> Bad request (json is incorrect)
-	// 401 -> Unuthorzied (usernmae/passsord is incorrect, jwt expired)
-	// 404 -> Resource not foud ( url is incorrect or resource not available for
-	// given criteria or id)
-
-	// 5xx -> 500, 502, -> Internal server error, 502 service not.
-	// /xyz -> redirects /abc 3xx, 302
-
-	@RequestMapping(value = "/students")
-	public List<Student> students() {
-		return studentDao.findAll();
+		return modelAndView;
 	}
 
-	@RequestMapping(value = "/students", method = RequestMethod.POST)
-	public String creatStudent(@RequestBody Student student) {
-		studentDao.save(student);
-		return "OK";
-
+	@GetMapping("/students/addStudent")
+	public ModelAndView addStudent() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("addStudent");
+		modelAndView.addObject("student", new StudentVo());
+		return modelAndView;
 	}
 
-	@RequestMapping(value = "/students/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> findById(@PathVariable(name = "id") Integer id) {
-		Student student = studentDao.findById(id);
+	@PostMapping("/students/addStudent")
+	public ModelAndView createStudent(@ModelAttribute StudentVo studentVo) {
+		ModelAndView modelAndView = new ModelAndView();
+		System.out.println(studentVo);
 
-		ResponseEntity<?> studedntResponse = null;
+		Student student = new Student();
+		student.setFirstName(studentVo.getFirstName());
+		student.setLastName(studentVo.getLastName());
+		student.setMobile(studentVo.getMobile());
+		student.setRollNo(studentVo.getRollNo());
+		student.setCourse(studentVo.getCourse());
 
-		if (student != null) {
-			studedntResponse = new ResponseEntity<Student>(student, HttpStatus.OK);
+		int created = studentDao.save(student);
+		if (created > 0) {
+			String message = "Student added successfully...";
+			modelAndView.addObject("message", message);
+
 		} else {
-			studedntResponse = new ResponseEntity<String>("Student not found with id: "+id, HttpStatus.NOT_FOUND);
+			String message = "Student not added...";
+			modelAndView.addObject("message", message);
+
 		}
-		return studedntResponse;
+		modelAndView.setViewName("students");
+		List<Student> studentList = studentDao.findAll();
+		System.out.println("Students fetched from db : " + studentList.size());
+		modelAndView.addObject("students", studentList);
 
+		return modelAndView;
 	}
 
-	@RequestMapping(value = "/students/{id}", method = RequestMethod.DELETE)
-	public String deleteStudent(@PathVariable(name = "id") Integer id) {
-		studentDao.delete(id);
-		return "Student deleted";
+	@GetMapping("/students/edit/{id}")
+	public ModelAndView editStudent(@PathVariable("id") Integer id) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("editStudent");
+
+		Student studentFromDb = studentDao.findById(id);
+		StudentVo studentVo = new StudentVo();
+
+		studentVo.setFirstName(studentFromDb.getFirstName());
+		studentVo.setLastName(studentFromDb.getLastName());
+		studentVo.setMobile(studentFromDb.getMobile());
+		studentVo.setRollNo(studentFromDb.getRollNo());
+		studentVo.setCourse(studentFromDb.getCourse());
+
+		modelAndView.addObject("student", studentVo);
+
+		return modelAndView;
+	}
+	
+	@PostMapping("/students/update")
+	public ModelAndView updateStudent(@ModelAttribute StudentVo studentVo) {
+		ModelAndView modelAndView = new ModelAndView();
+		System.out.println(studentVo);
+
+		Student student = new Student();
+		student.setFirstName(studentVo.getFirstName());
+		student.setLastName(studentVo.getLastName());
+		student.setMobile(studentVo.getMobile());
+		student.setRollNo(studentVo.getRollNo());
+		student.setCourse(studentVo.getCourse());
+
+		int created = studentDao.update(student);;
+		if (created > 0) {
+			String message = "Student updated successfully...";
+			modelAndView.addObject("message", message);
+
+		} else {
+			String message = "Student not updated...";
+			modelAndView.addObject("message", message);
+
+		}
+		modelAndView.setViewName("students");
+		List<Student> studentList = studentDao.findAll();
+		System.out.println("Students fetched from db : " + studentList.size());
+		modelAndView.addObject("students", studentList);
+
+		return modelAndView;
 	}
 
-	@RequestMapping(value = "/students/{id}", method = RequestMethod.PUT)
-	public Student update(@PathVariable(name = "id") Integer id, @RequestBody Student student) {
-		student.setId(id);
-		studentDao.update(student);
-		return student;
-	}
+	@GetMapping("/students/delete/{id}")
+	public ModelAndView deleteStudent(@PathVariable("id") Integer id) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("students");
 
-	@RequestMapping(value = "/students/search", method = RequestMethod.GET)
-	public Student search(@RequestParam(name = "rollNo", required = false) Integer rollNo,
-			@RequestParam(name = "firstName", required = false) String firstName,
-			@RequestParam(name = "mobile", required = false) String mobile) {
-		return studentDao.search(rollNo, firstName, mobile);
+		int deleted = studentDao.delete(id);
+		System.out.println("Student deleted..");
+		List<Student> studentList = studentDao.findAll();
+		System.out.println("Students fetched from db : " + studentList.size());
+		modelAndView.addObject("students", studentList);
+
+		if (deleted > 0) {
+			String message = "Student deleted successfully...";
+			modelAndView.addObject("message", message);
+		} else {
+			String message = "Student not deleted...";
+			modelAndView.addObject("message", message);
+
+		}
+		return modelAndView;
 	}
 
 }

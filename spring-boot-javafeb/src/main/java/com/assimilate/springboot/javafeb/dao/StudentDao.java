@@ -6,11 +6,11 @@ import com.assimilate.springboot.javafeb.model.Student;
 
 public interface StudentDao {
 
-	public void save(Student student);
+	public int save(Student student);
 
-	public void update(Student student);
+	public int update(Student student);
 
-	public void delete(Integer studentId);
+	public int delete(Integer studentId);
 
 	public List<Student> findAll();
 
