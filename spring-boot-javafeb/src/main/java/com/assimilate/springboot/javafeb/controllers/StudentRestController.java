@@ -2,6 +2,8 @@ package com.assimilate.springboot.javafeb.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import com.assimilate.springboot.javafeb.model.ErrorResponse;
 import com.assimilate.springboot.javafeb.model.Student;
 
 @RestController
+@RequestMapping("/api")
 public class StudentRestController {
 
 	@Autowired
@@ -63,7 +66,7 @@ public class StudentRestController {
 	}
 
 	@RequestMapping(value = "/students", method = RequestMethod.POST)
-	public String creatStudent(@RequestBody Student student) {
+	public String creatStudent(@Valid @RequestBody Student student) {
 		studentDao.save(student);
 		return "OK";
 

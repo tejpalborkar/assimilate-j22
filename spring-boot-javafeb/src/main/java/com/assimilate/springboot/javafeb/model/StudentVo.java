@@ -1,9 +1,15 @@
 package com.assimilate.springboot.javafeb.model;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class StudentVo {
 
 	private Integer id;
+	
+	@NotEmpty(message = "First name cannot be null")
 	private String firstName;
+	
 	private String lastName;
 	private Integer rollNo;
 	private String mobile;

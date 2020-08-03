@@ -1,12 +1,31 @@
 package com.assimilate.springboot.javafeb.model;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Student {
 	
 	private Integer id;
+	@NotEmpty(message = "First name cannot be empty")
+	@NotNull(message = "First name cannot be null")
 	private String firstName;
+	
+	
+	@NotNull(message = "Last name cannot be null")
+	@NotEmpty(message = "Last name cannot be empty")
 	private String lastName;
+	
+	
+	@NotNull(message = "Roll no cannot be null")
 	private Integer rollNo;
+	
+	@Size(min = 10, max = 13, message 
+		      = "Mobile no must be between 10 and 13")
 	private String mobile;
+	
 	private String course;
 	
 	public Integer getId() {

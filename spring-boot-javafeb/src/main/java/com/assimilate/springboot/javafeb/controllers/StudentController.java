@@ -2,6 +2,8 @@ package com.assimilate.springboot.javafeb.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +43,7 @@ public class StudentController {
 	}
 
 	@PostMapping("/students/addStudent")
-	public ModelAndView createStudent(@ModelAttribute StudentVo studentVo) {
+	public ModelAndView createStudent(@Valid @ModelAttribute StudentVo studentVo) {
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println(studentVo);
 
