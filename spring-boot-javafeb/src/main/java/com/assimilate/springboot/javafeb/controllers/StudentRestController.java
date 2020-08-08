@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,6 +61,7 @@ public class StudentRestController {
 	// 5xx -> 500, 502, -> Internal server error, 502 service not.
 	// /xyz -> redirects /abc 3xx, 302
 
+	
 	@RequestMapping(value = "/students")
 	public List<Student> students() {
 		return studentDao.findAll();

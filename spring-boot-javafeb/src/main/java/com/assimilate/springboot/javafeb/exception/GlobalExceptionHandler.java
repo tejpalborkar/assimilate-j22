@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@Controller
-@ControllerAdvice
+//@Controller
+//@ControllerAdvice
 public class GlobalExceptionHandler {
 
 	@ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
@@ -27,6 +27,7 @@ public class GlobalExceptionHandler {
 		Map<String, String> responseMap = new HashMap<String, String>();
 		responseMap.put("message", "These is some problem with the server. Internal server error");
 		responseMap.put("code", "500");
+		e.printStackTrace();
 		return responseMap;
 
 	}

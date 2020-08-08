@@ -16,7 +16,7 @@ public class HomeController {
 	// ModelAndView class
 	
 	
-	@RequestMapping(value = "/helloWorld")
+	@RequestMapping(value = "/api/helloWorld")
 	public ModelAndView helloWorld() {
 		System.out.println("Executing helloworld method.");
 		ModelAndView modelAndView = new ModelAndView("helloWorld");

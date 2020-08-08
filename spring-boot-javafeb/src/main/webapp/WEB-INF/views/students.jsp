@@ -9,8 +9,9 @@
 </head>
 <body>
 
-
+<a href="/students/addStudent">Add Student</a>
 ${message}
+
 
 	<table border=1>
 		<tr>
