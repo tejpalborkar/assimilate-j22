@@ -2,11 +2,18 @@ package com.assimilate.hibernate;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.assimilate.hibernate.onetoone.EmployeeAddress;
 
 @Entity
 @Table(name = "employee")
@@ -18,7 +25,7 @@ public class Employee  implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column
@@ -29,6 +36,10 @@ public class Employee  implements Serializable{
 	
 	@Column
 	private String department;
+	
+	@OneToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL, mappedBy="employee")
+	@JoinColumn(name="employeeId")
+	private EmployeeAddress employeeAddress;
 	
 	
 	public Employee() {
@@ -59,6 +70,16 @@ public class Employee  implements Serializable{
 	public void setDepartment(String department) {
 		this.department = department;
 	}
+	
+	
+	public EmployeeAddress getEmployeeAddress() {
+		return employeeAddress;
+	}
+
+	public void setEmployeeAddress(EmployeeAddress employeeAddress) {
+		this.employeeAddress = employeeAddress;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
