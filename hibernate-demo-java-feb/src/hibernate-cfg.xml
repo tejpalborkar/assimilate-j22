@@ -13,8 +13,11 @@
 		<property name="hbm2ddl.auto">create</property>
 
 		<mapping class="com.assimilate.hibernate.Employee" />
-		<mapping
-			class="com.assimilate.hibernate.onetoone.EmployeeAddress" />
+		<mapping class="com.assimilate.hibernate.onetoone.EmployeeAddress" />
+		
+		<mapping class="com.assimilate.hibernate.onetomany.Stock" />
+		<mapping class="com.assimilate.hibernate.onetomany.StockDailyRecord" />
+		
 
 	</session-factory>
 </hibernate-configuration>

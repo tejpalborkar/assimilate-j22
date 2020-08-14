@@ -21,17 +21,17 @@ public class TestOnetoOne {
 		employeeAddress.setState("Maharashtra");
 		employeeAddress.setCity("Pune");
 
-		//employee.setEmployeeAddress(employeeAddress);
+		employee.setEmployeeAddress(employeeAddress);
 
 		session.save(employee);
 		
 		session.beginTransaction().commit();
-//		System.out.println("Employee saved: " + employee);
+		System.out.println("Employee saved: " + employee);
 //		
-//		Employee employeeFromDb = session.get(Employee.class, 1);
+		Employee employeeFromDb = session.get(Employee.class, 2);
 //		
-//		System.out.println(employeeFromDb);
-//		System.out.println(employeeFromDb.getEmployeeAddress());
+		System.out.println(employeeFromDb);
+		System.out.println(employeeFromDb.getEmployeeAddress());
 
 	}
 }

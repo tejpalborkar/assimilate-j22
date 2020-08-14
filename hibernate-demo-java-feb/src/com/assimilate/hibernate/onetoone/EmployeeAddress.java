@@ -5,7 +5,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,24 +20,22 @@ import com.assimilate.hibernate.Employee;
 @Entity
 @Table(name = "employee_address")
 public class EmployeeAddress {
-	
+
 	@Id
 	@Column(name = "employee_id")
-	@ForeignKey(name="FK_EMP_ID")
-	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "employee") )
-	@GeneratedValue(generator = "generator")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer employeeId;
-	
+
 	private String country;
-	
+
 	private String state;
-	
+
 	private String city;
-	
-	
-	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "EMP_ID")
 	private Employee employee;
-	
+
 	public EmployeeAddress() {
 		// TODO Auto-generated constructor stub
 	}
@@ -74,9 +74,8 @@ public class EmployeeAddress {
 
 	@Override
 	public String toString() {
-		return "EmployeeAddress [employeeId=" + employeeId + ", country=" + country + ", state=" + state + ", city="+city+"";
+		return "EmployeeAddress [employeeId=" + employeeId + ", country=" + country + ", state=" + state + ", city="
+				+ city + "";
 	}
-	
 
-	
 }
