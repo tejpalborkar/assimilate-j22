@@ -12,12 +12,16 @@
 		<property name="show_sql">true</property>
 		<property name="hbm2ddl.auto">create</property>
 
-		<mapping class="com.assimilate.hibernate.Employee" />
-		<mapping class="com.assimilate.hibernate.onetoone.EmployeeAddress" />
+		<!-- <mapping class="com.assimilate.hibernate.Employee" /> <mapping class="com.assimilate.hibernate.onetoone.EmployeeAddress" 
+			/> <mapping class="com.assimilate.hibernate.onetomany.Stock" /> <mapping 
+			class="com.assimilate.hibernate.onetomany.StockDailyRecord" /> -->
+			
+	<!-- 	<mapping class="com.assimilate.hibernate.manytoone.Student" />
+		<mapping class="com.assimilate.hibernate.manytoone.Address" /> -->
 		
-		<mapping class="com.assimilate.hibernate.onetomany.Stock" />
-		<mapping class="com.assimilate.hibernate.onetomany.StockDailyRecord" />
+			<mapping class="com.assimilate.hibernate.manytomany.Student" />
+		<mapping class="com.assimilate.hibernate.manytomany.Course" />
 		
-
+		
 	</session-factory>
 </hibernate-configuration>
